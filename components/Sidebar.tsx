@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Montserrat } from "next/font/google";
 
 import { cn } from "@/lib/utils"
-import { Code, ImageIcon, LayoutDashboard, MessageSquare, Music, Settings, VideoIcon } from "lucide-react";
+import { Code, ImageIcon, LayoutDashboard, MessagesSquare, Music, Settings, VideoIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const monserrat = Montserrat({ weight: "600", subsets: ["latin"] });
@@ -19,7 +19,7 @@ const routes = [
     },
     {
         label: "Conversation",
-        icon: MessageSquare,
+        icon: MessagesSquare,
         href: "/conversation",
         color: "text-violet-500"
     },
