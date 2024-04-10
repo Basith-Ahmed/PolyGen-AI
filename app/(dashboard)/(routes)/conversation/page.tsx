@@ -2,6 +2,7 @@
 
 import * as z from "zod";
 
+import Loader from "@/components/Loader";
 import Heading from "@/components/Heading";
 
 import { formSchema } from "./constants";
@@ -17,6 +18,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import { Empty } from "@/components/Empty";
+import { cn } from "@/lib/utils";
+import UserAvatar from "@/components/UserAvatar";
+import BotAvatar from "@/components/BotAvatar";
 
 export default function ConversationPage() {
   const router = useRouter();
@@ -96,21 +100,39 @@ export default function ConversationPage() {
           </Form>
         </div>
         <div className="space-y-4 mt-4">
-          {messages.length === 0 && !isLoading && <Empty label="No conversation started"/>}
+          {isLoading && (
+            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
+              <Loader />
+            </div>
+          )}
+          {messages.length === 0 && !isLoading && (
+            <Empty label="No conversation started" />
+          )}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message, index) => (
-              <div key={index}>
-                {typeof message.content === "string" ? (
-                  message.content
-                ) : Array.isArray(message.content) ? (
-                  message.content.map((part, partIndex) => (
-                    <span key={partIndex}>
-                      {"text" in part ? part.text : part.toString()}
-                    </span>
-                  ))
-                ) : (
-                  <span>Message content not available</span>
+              <div
+                key={index}
+                className={cn(
+                  "p-8 w-full flex items-start gap-x-8 rounded-lg",
+                  message.role === "user"
+                    ? "bg-white border border-black/10"
+                    : "bg-muted"
                 )}
+              >
+                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
+                <p className="text-sm">
+                  {typeof message.content === "string" ? (
+                    message.content
+                  ) : Array.isArray(message.content) ? (
+                    message.content.map((part, partIndex) => (
+                      <span key={partIndex}>
+                        {"text" in part ? part.text : part.toString()}
+                      </span>
+                    ))
+                  ) : (
+                    <span>Message content not available</span>
+                  )}
+                </p>
               </div>
             ))}
           </div>
