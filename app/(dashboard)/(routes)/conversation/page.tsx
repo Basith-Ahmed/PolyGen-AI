@@ -6,6 +6,7 @@ import Heading from "@/components/Heading";
 
 import { formSchema } from "./constants";
 
+import axios from "axios";
 import { MessagesSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,9 +14,13 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
+import { Empty } from "@/components/Empty";
 
 export default function ConversationPage() {
-  const router = useRouter()
+  const router = useRouter();
+  const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -29,9 +34,21 @@ export default function ConversationPage() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      const userMessage: ChatCompletionMessageParam = {
+        role: "user",
+        content: values.prompt,
+      };
+      const newMessages = [...messages, userMessage];
+      const response = await axios.post("/api/conversation", {
+        messages: newMessages,
+      });
 
-    } catch(error) {
-      console.log(error)
+      setMessages((current) => [...current, userMessage, response.data]);
+
+      form.reset(); //clear input
+    } catch (error) {
+      //Open pro model
+      console.log(error);
     } finally {
       router.refresh();
     }
@@ -58,25 +75,45 @@ export default function ConversationPage() {
                 render={({ field }) => (
                   <FormItem className="col-span-12 lg:col-span-10">
                     <FormControl className="m-0 p-0">
-                        <Input 
+                      <Input
                         className="border-0 outline-none focus-visible:ring-0
                         focus-visible:ring-transparent"
                         disabled={isLoading}
                         placeholder="What can I help you with today?"
                         {...field} //onchange, onblur, value
-                        />
+                      />
                     </FormControl>
                   </FormItem>
                 )}
               />
-              <Button className="col-span-12 lg:col-span-2 w-full" disabled={isLoading}>
+              <Button
+                className="col-span-12 lg:col-span-2 w-full"
+                disabled={isLoading}
+              >
                 Generate
               </Button>
             </form>
           </Form>
         </div>
         <div className="space-y-4 mt-4">
-                Messages Content
+          {messages.length === 0 && !isLoading && <Empty label="No conversation started"/>}
+          <div className="flex flex-col-reverse gap-y-4">
+            {messages.map((message, index) => (
+              <div key={index}>
+                {typeof message.content === "string" ? (
+                  message.content
+                ) : Array.isArray(message.content) ? (
+                  message.content.map((part, partIndex) => (
+                    <span key={partIndex}>
+                      {"text" in part ? part.text : part.toString()}
+                    </span>
+                  ))
+                ) : (
+                  <span>Message content not available</span>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
