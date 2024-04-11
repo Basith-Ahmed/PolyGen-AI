@@ -38,7 +38,7 @@ const tools = [
   {
     label: "Audio Generator",
     icon: Music,
-    href: "/music",
+    href: "/audio",
     color: "text-emerald-500",
     bgColor: "bg-emerald-500/10",
   },

@@ -38,7 +38,7 @@ const routes = [
     {
         label: "Audio Generator",
         icon: Music,
-        href: "/music",
+        href: "/audio",
         color: "text-emerald-500"
     
     },
