@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 
 import OpenAI from 'openai';
 
+import { increaseApiLimit, checkApiLimit } from "@/lib/api-limit";
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY //This is default, can be omitted
 });
