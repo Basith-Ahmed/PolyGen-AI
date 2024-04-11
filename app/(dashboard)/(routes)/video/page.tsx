@@ -8,7 +8,7 @@ import Heading from "@/components/Heading";
 import { formSchema } from "./constants";
 
 import axios from "axios";
-import { Music } from "lucide-react";
+import { VideoIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
@@ -18,9 +18,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Empty } from "@/components/Empty";
 
-export default function AudioPage() {
+export default function VideoPage() {
   const router = useRouter();
-  const [audio, setAudio] = useState<string>();
+  const [video, setVideo] = useState<string>();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -35,10 +35,10 @@ export default function AudioPage() {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
 
-      setAudio(undefined)
-      const response = await axios.post("/api/audio", values);
+      setVideo(undefined)
+      const response = await axios.post("/api/video", values);
 
-      setAudio(response.data.audio)
+      setVideo(response.data[0])
       form.reset(); //clear input
     } catch (error) {
       //Open pro model
@@ -51,11 +51,11 @@ export default function AudioPage() {
   return (
     <div>
       <Heading
-        title="Audio Generator"
-        description="Turn your words into music"
-        icon={Music}
-        iconColor="text-emerald-500"
-        bgColor="bg-emerald-500/10"
+        title="Video Generator"
+        description="Turn your words into video"
+        icon={VideoIcon}
+        iconColor="text-orange-500"
+        bgColor="bg-orange-500/10"
       />
       <div className="px-4 lg:px-8">
         <div>
@@ -73,7 +73,7 @@ export default function AudioPage() {
                         className="border-0 outline-none focus-visible:ring-0
                         focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="I Wanna Be Yours in acoustic guitar"
+                        placeholder="Clown fish swimming around a coral reef"
                         {...field} //onchange, onblur, value
                       />
                     </FormControl>
@@ -95,13 +95,13 @@ export default function AudioPage() {
               <Loader />
             </div>
           )}
-          {!audio && !isLoading && (
-            <Empty label="No audio has been generated." />
+          {!video && !isLoading && (
+            <Empty label="No video has been generated." />
           )}
-          {audio && (
-            <audio controls className="w-full mt-8">
-              <source src={audio} />
-            </audio>
+          {video && (
+            <video controls className="w-full aspect-video mt-8 rounded-lg border bg-black">
+              <source src={video} />
+            </video>
           )}
         </div>
       </div>
