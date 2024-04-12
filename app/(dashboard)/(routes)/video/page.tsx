@@ -17,15 +17,17 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Empty } from "@/components/Empty";
+import { useProModal } from "@/hooks/UseProModal";
 
 export default function VideoPage() {
+
+  const proModel = useProModal();
   const router = useRouter();
   const [video, setVideo] = useState<string>();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      /*input by the user: promt*/
       prompt: "",
     },
   });

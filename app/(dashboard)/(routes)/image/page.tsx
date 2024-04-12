@@ -17,9 +17,6 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Empty } from "@/components/Empty";
-import { cn } from "@/lib/utils";
-import UserAvatar from "@/components/UserAvatar";
-import BotAvatar from "@/components/BotAvatar";
 import {
   Select,
   SelectContent,
@@ -29,16 +26,17 @@ import {
 } from "@/components/ui/select";
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
+import { useProModal } from "@/hooks/UseProModal";
 
 export default function ImagePage() {
-  const router = useRouter();
 
+  const proModel = useProModal();
+  const router = useRouter();
   const [images, setImages] = useState<string[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      /*input by the user: promt*/
       prompt: "",
       amount: "1",
       resolution: "512x512",
@@ -59,7 +57,10 @@ export default function ImagePage() {
 
       form.reset(); //clear input
     } catch (error) {
-      //Open pro model
+      if ((error as any)?.response?.status === 403) {
+        proModel.onOpen();
+        console.log(error);
+      }
       console.log(error);
     } finally {
       router.refresh();

@@ -23,15 +23,17 @@ import { Empty } from "@/components/Empty";
 import { cn } from "@/lib/utils";
 import UserAvatar from "@/components/UserAvatar";
 import BotAvatar from "@/components/BotAvatar";
+import { useProModal } from "@/hooks/UseProModal";
 
 export default function CodePage() {
+
+  const proModel = useProModal();
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      /*input by the user: promt*/
       prompt: "",
     },
   });
@@ -53,7 +55,10 @@ export default function CodePage() {
 
       form.reset(); //clear input
     } catch (error) {
-      //Open pro model
+      if ((error as any)?.response?.status === 403) {
+        proModel.onOpen();
+        console.log(error);
+      }
       console.log(error);
     } finally {
       router.refresh();

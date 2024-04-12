@@ -21,8 +21,11 @@ import { Empty } from "@/components/Empty";
 import { cn } from "@/lib/utils";
 import UserAvatar from "@/components/UserAvatar";
 import BotAvatar from "@/components/BotAvatar";
+import { useProModal } from "@/hooks/UseProModal";
 
 export default function ConversationPage() {
+
+  const proModel =  useProModal();
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
 
@@ -51,8 +54,10 @@ export default function ConversationPage() {
 
       form.reset(); //clear input
     } catch (error) {
-      //Open pro model
-      console.log(error);
+      if ((error as any)?.response?.status === 403) {
+        proModel.onOpen();
+        console.log(error);
+      }
     } finally {
       router.refresh(); //refresh and fetch all the info for components
     }

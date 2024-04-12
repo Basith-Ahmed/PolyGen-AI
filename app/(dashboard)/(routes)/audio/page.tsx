@@ -17,8 +17,11 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Empty } from "@/components/Empty";
+import { useProModal } from "@/hooks/UseProModal";
 
 export default function AudioPage() {
+
+  const proModel = useProModal();
   const router = useRouter();
   const [audio, setAudio] = useState<string>();
 
@@ -41,7 +44,10 @@ export default function AudioPage() {
       setAudio(response.data.audio)
       form.reset(); //clear input
     } catch (error) {
-      //Open pro model
+      if ((error as any)?.response?.status === 403) {
+        proModel.onOpen();
+        console.log(error);
+      }
       console.log(error);
     } finally {
       router.refresh();

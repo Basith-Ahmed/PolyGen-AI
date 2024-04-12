@@ -60,7 +60,7 @@ export default function DashboardPage() {
         <h2 className="text-2xl md:text-4xl font-bold text-center">
           Explore the power of <span className="gradient-text">PolyGen AI</span>
         </h2>
-        <p className="text-muted-foreground font-light text-sm md:text-lg text-center">
+        <p className="text-muted-foreground text-sm md:text-lg text-center">
           Chat and craft with the smartest AI
         </p>
       </div>
