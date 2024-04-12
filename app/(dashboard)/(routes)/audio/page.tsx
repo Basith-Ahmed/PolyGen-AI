@@ -79,7 +79,7 @@ export default function AudioPage() {
                         className="border-0 outline-none focus-visible:ring-0
                         focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="I Wanna Be Yours in acoustic guitar"
+                        placeholder="Violin solo in G minor"
                         {...field} //onchange, onblur, value
                       />
                     </FormControl>
@@ -87,7 +87,7 @@ export default function AudioPage() {
                 )}
               />
               <Button
-                className="col-span-12 lg:col-span-2 w-full"
+                className="col-span-12 lg:col-span-2 w-full font-bold text-[#041e49]"
                 disabled={isLoading}
               >
                 Generate

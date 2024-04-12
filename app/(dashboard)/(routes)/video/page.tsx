@@ -75,7 +75,7 @@ export default function VideoPage() {
                         className="border-0 outline-none focus-visible:ring-0
                         focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="Clown fish swimming around a coral reef"
+                        placeholder="A clown fish swimming around a coral reef"
                         {...field} //onchange, onblur, value
                       />
                     </FormControl>
@@ -83,7 +83,7 @@ export default function VideoPage() {
                 )}
               />
               <Button
-                className="col-span-12 lg:col-span-2 w-full"
+                className="col-span-12 lg:col-span-2 w-full font-bold text-[#041e49]"
                 disabled={isLoading}
               >
                 Generate

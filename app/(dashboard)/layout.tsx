@@ -15,7 +15,7 @@ export default async function DashboardLayout({
         <Sidebar apiLimitCount={apiLimitCount} />
       </div>
       <main className="md:pl-72 h-full">
-        <div className="md:bg-[#111827] md:h-full md:p-4 md:pl-0">
+        <div className="md:bg-[#f0f4f9] md:h-full md:p-4 md:pl-0">
           <div className="md:rounded-xl md:bg-white md:h-full">
             <Navbar />
             {children}

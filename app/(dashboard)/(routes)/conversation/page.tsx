@@ -24,8 +24,7 @@ import BotAvatar from "@/components/BotAvatar";
 import { useProModal } from "@/hooks/UseProModal";
 
 export default function ConversationPage() {
-
-  const proModel =  useProModal();
+  const proModel = useProModal();
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
 
@@ -96,7 +95,7 @@ export default function ConversationPage() {
                 )}
               />
               <Button
-                className="col-span-12 lg:col-span-2 w-full"
+                className="col-span-12 lg:col-span-2 w-full font-bold text-[#041e49]"
                 disabled={isLoading}
               >
                 Generate

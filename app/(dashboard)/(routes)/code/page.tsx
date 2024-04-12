@@ -98,7 +98,7 @@ export default function CodePage() {
                 )}
               />
               <Button
-                className="col-span-12 lg:col-span-2 w-full"
+                className="col-span-12 lg:col-span-2 w-full font-bold text-[#041e49]"
                 disabled={isLoading}
               >
                 Generate
@@ -113,7 +113,7 @@ export default function CodePage() {
             </div>
           )}
           {messages.length === 0 && !isLoading && (
-            <Empty label="No conversation started" />
+            <Empty label="No code has been generated." />
           )}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message, index) => (

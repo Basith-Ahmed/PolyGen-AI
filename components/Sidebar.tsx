@@ -72,14 +72,15 @@ export default function Sidebar({ apiLimitCount = 0 }: SidebarProp) {
   const pathname = usePathname();
 
   return (
-    <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
+    <div className="space-y-4 py-4 flex flex-col h-full bg-[#f0f4f9] text-white">
       <div className="px-2 py-3 flex-1">
-        <Link href={"/dashboard"} className="flex items-center pl-3 mb-14">
-          <div className="relative w-8 h-8 mr-4">
+        <Link href={"/dashboard"} className="flex items-center pl-2 mb-14 w-full">
+          <div className="relative w-8 h-8 mr-2">
             <Image fill alt="Logo" src={"/favicon.png"} />
           </div>
-          <h1 className={cn("text-2xl font-bold", monserrat.className)}>
+          <h1 className={cn("text-3xl font-bold text-[#5f6368]")}>
             PolyGen AI
+            {/* <span className="gradient-text">PolyGen AI</span> */}
           </h1>
         </Link>
         <div className="space-y-1">
@@ -88,10 +89,10 @@ export default function Sidebar({ apiLimitCount = 0 }: SidebarProp) {
               href={route.href}
               key={route.href}
               className={cn(
-                "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition",
+                "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-[#1f1f1f] hover:bg-black/10 rounded-lg transition",
                 pathname === route.href
-                  ? "text-white bg-white/10"
-                  : "text-zinc-400"
+                  ? "text-[#1f1f1f] bg-[#d3e3fd] font-semibold"
+                  : "text-[#444746]"
               )}
             >
               <div className="flex items-center flex-1">

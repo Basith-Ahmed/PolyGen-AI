@@ -92,7 +92,7 @@ export default function ImagePage() {
                         className="border-0 outline-none focus-visible:ring-0
                         focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="Picture of horse in Swiss alps"
+                        placeholder="Picture of a horse in Swiss alps"
                         {...field} //onchange, onblur, value
                       />
                     </FormControl>
@@ -154,7 +154,7 @@ export default function ImagePage() {
                 )}
               />
               <Button
-                className="col-span-12 lg:col-span-2 w-full"
+                className="col-span-12 lg:col-span-2 w-full font-bold text-[#041e49]"
                 disabled={isLoading}
               >
                 Generate
@@ -169,7 +169,7 @@ export default function ImagePage() {
             </div>
           )}
           {images.length === 0 && !isLoading && (
-            <Empty label="No images have been generated" />
+            <Empty label="No images have been generated." />
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
             {images.map((src) => (
