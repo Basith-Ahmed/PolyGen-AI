@@ -70,7 +70,7 @@ export default function ImagePage() {
     <div>
       <Heading
         title="Image Generator"
-        description="World's most advanced LLM model"
+        description="Bring your imaginations to life"
         icon={ImageIcon}
         iconColor="text-pink-500"
         bgColor="bg-pink-500/10"
@@ -107,11 +107,11 @@ export default function ImagePage() {
                       disabled={isLoading}
                       onValueChange={field.onChange}
                       value={field.value}
-                      defaultValues={field.value}
+                      defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue defaultValues={field.value} />
+                          <SelectValue defaultValue={field.value} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -134,11 +134,11 @@ export default function ImagePage() {
                       disabled={isLoading}
                       onValueChange={field.onChange}
                       value={field.value}
-                      defaultValues={field.value}
+                      defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue defaultValues={field.value} />
+                          <SelectValue defaultValue={field.value} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
