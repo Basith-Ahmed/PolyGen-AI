@@ -32,13 +32,13 @@ export async function POST(req: Request) {
     if (!freeTrial) {
       return new NextResponse("Free trial has expired.", { status: 403 })
     }
+    await increaseApiLimit();
 
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages,
     });
 
-    await increaseApiLimit();
 
     return NextResponse.json(response.choices[0].message);
   } catch (error) {

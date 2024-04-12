@@ -54,7 +54,7 @@ export default function ConversationPage() {
       //Open pro model
       console.log(error);
     } finally {
-      router.refresh();
+      router.refresh(); //refresh and fetch all the info for components
     }
   };
 
