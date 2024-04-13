@@ -11,12 +11,12 @@ export default async function DashboardLayout({
 
   return (
     <div className="h-full relative">
-      <div className="hidden h-full md:flex md:w-72 md:flex-col md:fixed md:inset-y-0 bg-gray-900">
+      <div className="hidden h-full md:flex md:w-[280px] md:flex-col md:fixed md:inset-y-0 bg-gray-900">
         <Sidebar apiLimitCount={apiLimitCount} />
       </div>
-      <main className="md:pl-72 h-full">
-        <div className="md:bg-[#f0f4f9] md:h-full md:p-4 md:pl-0">
-          <div className="md:rounded-xl md:bg-white md:h-full">
+      <main className="md:pl-[280px] h-full">
+        <div className="md:bg-[#f0f4f9] md:h-full md:p-4">
+          <div className="md:rounded-lg md:bg-white md:h-full md:shadow-md">
             <Navbar />
             {children}
           </div>

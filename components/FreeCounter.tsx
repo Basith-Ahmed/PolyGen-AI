@@ -24,12 +24,12 @@ export default function FreeCounter({ apiLimitCount = 0 }: FreeCounterProps) {
   }
 
   return (
-    <div className="px-3">
-      <Card className="bg-[#dbe7f5] border-0">
+    <div className="px-4 md:pr-0">
+      <Card className="bg-[#d3e3fd] border-0 shadow-md">
         <CardContent className="py-6">
           <div className="text-center text-sm font-bold text-[#041e49] mb-4 space-y-2">
             <p>
-              {MAX_FREE_COUNTS - apiLimitCount} of {MAX_FREE_COUNTS} Creations Remaining
+              {MAX_FREE_COUNTS - apiLimitCount} of {MAX_FREE_COUNTS} Generations Remaining
             </p>
             <Progress
               className="h-2"

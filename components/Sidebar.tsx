@@ -73,7 +73,7 @@ export default function Sidebar({ apiLimitCount = 0 }: SidebarProp) {
 
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#f0f4f9] text-white">
-      <div className="px-2 py-3 flex-1">
+      <div className="p-4 md:pr-0 flex-1">
         <Link href={"/dashboard"} className="flex items-center pl-2 mb-14 w-full">
           <div className="relative w-8 h-8 mr-2">
             <Image fill alt="Logo" src={"/favicon.png"} />
@@ -91,7 +91,7 @@ export default function Sidebar({ apiLimitCount = 0 }: SidebarProp) {
               className={cn(
                 "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-[#1f1f1f] hover:bg-black/10 rounded-lg transition",
                 pathname === route.href
-                  ? "text-[#1f1f1f] bg-[#d3e3fd] font-semibold"
+                  ? "text-[#1f1f1f] bg-[#d3e3fd] font-semibold shadow-md"
                   : "text-[#444746]"
               )}
             >
