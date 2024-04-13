@@ -9,9 +9,10 @@ import { useEffect, useState } from "react";
 
 interface HamburgerMenuProps {
   apiLimitCount: number;
+  isPro: boolean;
 }
 
-export default function HamburgerMenu({ apiLimitCount }: HamburgerMenuProps) {
+export default function HamburgerMenu({ apiLimitCount = 0, isPro = false }: HamburgerMenuProps) {
   /*hydration error*/
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function HamburgerMenu({ apiLimitCount }: HamburgerMenuProps) {
         </Button>
       </SheetTrigger>
       <SheetContent side={"left"} className="p-0">
-        <Sidebar apiLimitCount={apiLimitCount} />
+        <Sidebar apiLimitCount={apiLimitCount} isPro={isPro}/>
       </SheetContent>
     </Sheet>
   );

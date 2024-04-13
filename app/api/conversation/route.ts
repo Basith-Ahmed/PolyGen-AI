@@ -1,12 +1,13 @@
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
-import OpenAI from 'openai';
+import OpenAI from "openai";
 
 import { increaseApiLimit, checkApiLimit } from "@/lib/api-limit";
+import { checkSubscription } from "@/lib/subscription";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY //This is default, can be omitted
+  apiKey: process.env.OPENAI_API_KEY, //This is default, can be omitted
 });
 
 export async function POST(req: Request) {
@@ -28,17 +29,20 @@ export async function POST(req: Request) {
     }
 
     const freeTrial = await checkApiLimit();
+    const isPro = await checkSubscription();
 
-    if (!freeTrial) {
-      return new NextResponse("Free trial has expired.", { status: 403 })
+    if (!freeTrial && !isPro) {
+      return new NextResponse("Free trial has expired.", { status: 403 });
     }
-    await increaseApiLimit();
 
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages,
     });
 
+    if (!isPro) {
+      await increaseApiLimit();
+    }
 
     return NextResponse.json(response.choices[0].message);
   } catch (error) {
