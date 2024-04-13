@@ -18,9 +18,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Empty } from "@/components/Empty";
 import { useProModal } from "@/hooks/UseProModal";
+import toast from "react-hot-toast";
 
 export default function VideoPage() {
-
   const proModel = useProModal();
   const router = useRouter();
   const [video, setVideo] = useState<string>();
@@ -36,14 +36,18 @@ export default function VideoPage() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-
-      setVideo(undefined)
+      setVideo(undefined);
       const response = await axios.post("/api/video", values);
 
-      setVideo(response.data[0])
-      form.reset(); //clear input
+      setVideo(response.data[0]);
+      form.reset();
     } catch (error) {
-      //Open pro model
+      if ((error as any)?.response?.status === 403) {
+        proModel.onOpen();
+        console.log(error);
+      } else {
+        toast.error("Something went wrong!");
+      }
       console.log(error);
     } finally {
       router.refresh();
@@ -101,7 +105,10 @@ export default function VideoPage() {
             <Empty label="No video has been generated." />
           )}
           {video && (
-            <video controls className="w-full aspect-video mt-8 rounded-lg border bg-black">
+            <video
+              controls
+              className="w-full aspect-video mt-8 rounded-lg border bg-black"
+            >
               <source src={video} />
             </video>
           )}

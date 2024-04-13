@@ -27,9 +27,9 @@ import {
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
 import { useProModal } from "@/hooks/UseProModal";
+import toast from "react-hot-toast";
 
 export default function ImagePage() {
-
   const proModel = useProModal();
   const router = useRouter();
   const [images, setImages] = useState<string[]>([]);
@@ -55,11 +55,13 @@ export default function ImagePage() {
 
       setImages(urls);
 
-      form.reset(); //clear input
+      form.reset();
     } catch (error) {
       if ((error as any)?.response?.status === 403) {
         proModel.onOpen();
         console.log(error);
+      } else {
+        toast.error("Something went wrong!");
       }
       console.log(error);
     } finally {
@@ -180,8 +182,9 @@ export default function ImagePage() {
                 <CardFooter className="p-2">
                   <Button variant={"secondary"} className="w-full">
                     <Download
-                    onClick={() => window.open(src)} 
-                    className="w-4 h-4 mr-2"/>
+                      onClick={() => window.open(src)}
+                      className="w-4 h-4 mr-2"
+                    />
                   </Button>
                 </CardFooter>
               </Card>

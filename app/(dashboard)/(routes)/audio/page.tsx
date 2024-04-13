@@ -18,9 +18,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Empty } from "@/components/Empty";
 import { useProModal } from "@/hooks/UseProModal";
+import toast from "react-hot-toast";
 
 export default function AudioPage() {
-
   const proModel = useProModal();
   const router = useRouter();
   const [audio, setAudio] = useState<string>();
@@ -37,16 +37,17 @@ export default function AudioPage() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-
-      setAudio(undefined)
+      setAudio(undefined);
       const response = await axios.post("/api/audio", values);
 
-      setAudio(response.data.audio)
-      form.reset(); //clear input
+      setAudio(response.data.audio);
+      form.reset();
     } catch (error) {
       if ((error as any)?.response?.status === 403) {
         proModel.onOpen();
         console.log(error);
+      } else {
+        toast.error("Something went wrong!");
       }
       console.log(error);
     } finally {

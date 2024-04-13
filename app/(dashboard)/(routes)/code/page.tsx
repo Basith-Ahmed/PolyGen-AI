@@ -24,9 +24,9 @@ import { cn } from "@/lib/utils";
 import UserAvatar from "@/components/UserAvatar";
 import BotAvatar from "@/components/BotAvatar";
 import { useProModal } from "@/hooks/UseProModal";
+import toast from "react-hot-toast";
 
 export default function CodePage() {
-
   const proModel = useProModal();
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
@@ -53,11 +53,13 @@ export default function CodePage() {
 
       setMessages((current) => [...current, userMessage, response.data]);
 
-      form.reset(); //clear input
+      form.reset();
     } catch (error) {
       if ((error as any)?.response?.status === 403) {
         proModel.onOpen();
         console.log(error);
+      } else {
+        toast.error("Something went wrong!");
       }
       console.log(error);
     } finally {
@@ -135,9 +137,7 @@ export default function CodePage() {
                           <pre {...props} />
                         </div>
                       ),
-                      code: ({ node, ...props }) => (
-                        <code />
-                      ),
+                      code: ({ node, ...props }) => <code />,
                     }}
                     className="text-sm overflow-hidden leading-7"
                   >

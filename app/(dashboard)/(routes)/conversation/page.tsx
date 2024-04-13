@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils";
 import UserAvatar from "@/components/UserAvatar";
 import BotAvatar from "@/components/BotAvatar";
 import { useProModal } from "@/hooks/UseProModal";
+import toast from "react-hot-toast";
 
 export default function ConversationPage() {
   const proModel = useProModal();
@@ -51,11 +52,13 @@ export default function ConversationPage() {
 
       setMessages((current) => [...current, userMessage, response.data]);
 
-      form.reset(); //clear input
+      form.reset();
     } catch (error) {
       if ((error as any)?.response?.status === 403) {
         proModel.onOpen();
         console.log(error);
+      } else {
+        toast.error("Something went wrong!")
       }
     } finally {
       router.refresh(); //refresh and fetch all the info for components
