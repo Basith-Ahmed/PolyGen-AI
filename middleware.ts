@@ -1,7 +1,7 @@
 import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
-  publicRoutes: ["/"] //landing page: access unprotected
+  publicRoutes: ["/", "/api/webhook"] //landing page: access unprotected
 });
 
 export const config = {

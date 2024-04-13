@@ -22,40 +22,57 @@ import {
 import { Card } from "./ui/card";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
+import axios from "axios";
+import { useState } from "react";
+
+const tools = [
+  {
+    label: "Conversation",
+    icon: MessagesSquare,
+    color: "text-violet-500",
+    bgColor: "bg-violet-500/10",
+  },
+  {
+    label: "Image Generator",
+    icon: ImageIcon,
+    color: "text-pink-500",
+    bgColor: "bg-pink-500/10",
+  },
+  {
+    label: "Video Generator",
+    icon: VideoIcon,
+    color: "text-orange-500",
+    bgColor: "bg-orange-500/10",
+  },
+  {
+    label: "Audio Generator",
+    icon: Music,
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-500/10",
+  },
+  {
+    label: "Code Generator",
+    icon: Code,
+    color: "text-green-500",
+    bgColor: "bg-green-500/10",
+  },
+];
 
 export default function ProModal() {
-  const tools = [
-    {
-      label: "Conversation",
-      icon: MessagesSquare,
-      color: "text-violet-500",
-      bgColor: "bg-violet-500/10",
-    },
-    {
-      label: "Image Generator",
-      icon: ImageIcon,
-      color: "text-pink-500",
-      bgColor: "bg-pink-500/10",
-    },
-    {
-      label: "Video Generator",
-      icon: VideoIcon,
-      color: "text-orange-500",
-      bgColor: "bg-orange-500/10",
-    },
-    {
-      label: "Audio Generator",
-      icon: Music,
-      color: "text-emerald-500",
-      bgColor: "bg-emerald-500/10",
-    },
-    {
-      label: "Code Generator",
-      icon: Code,
-      color: "text-green-500",
-      bgColor: "bg-green-500/10",
-    },
-  ];
+
+  const [loading, setLoading] = useState(false);
+  const onSubscribe = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("/api/stripe");
+
+      window.location.href = response.data.url
+    } catch (error){
+      console.log(error, "STRIPE_CLIENT_ERROR");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const proModal = useProModal();
 
@@ -93,6 +110,7 @@ export default function ProModal() {
             size="lg"
             variant="premium"
             className="w-full"
+            onClick={onSubscribe}
             >
                 Upgrade
                 <Zap className="w-4 h-4 ml-2 fill-white"/>
