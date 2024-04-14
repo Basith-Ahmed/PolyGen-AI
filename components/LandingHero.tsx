@@ -78,7 +78,7 @@ export default function LandingHero() {
           font_v1.className
         )}
       >
-        No credit card required.
+        {/* No credit card required. */}
       </div>
     </div>
   );
