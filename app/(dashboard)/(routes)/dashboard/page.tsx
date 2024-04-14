@@ -57,7 +57,7 @@ export default function DashboardPage() {
   return (
     <div>
       <div className="mb-8 space-y-4">
-        <h2 className="text-2xl md:text-4xl font-bold text-center">
+        <h2 className="text-2xl md:text-4xl font-bold text-center px-4">
           Explore the power of <span className="bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-300 bg-clip-text text-transparent">PolyGen AI</span>
         </h2>
         <p className="text-muted-foreground text-sm md:text-lg text-center">
