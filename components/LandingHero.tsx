@@ -22,7 +22,7 @@ export default function LandingHero() {
   const { isSignedIn } = useAuth();
 
   return (
-    <div className="text-black font-bold py-24 text-center space-y-5">
+    <div className="text-black font-bold py-24 text-center space-y-5 mx-4">
       <div
         className={cn(
           "text-5xl sm:text-6xl md:text-7xl lg:text-9xl space-y-6 px-8 tracking-tight",

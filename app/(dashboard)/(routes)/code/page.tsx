@@ -145,7 +145,7 @@ export default function CodePage() {
                   </ReactMarkdown>
                 ) : Array.isArray(message.content) ? (
                   message.content.map((part, partIndex) => (
-                    <ReactMarkdown>
+                    <ReactMarkdown key={partIndex}>
                       {"text" in part ? part.text : part.toString()}
                     </ReactMarkdown>
                   ))

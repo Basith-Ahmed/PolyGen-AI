@@ -21,7 +21,7 @@ export default function LandingNavbar() {
   return (
     <nav className="pt-8 px-4 bg-transparent flex items-center justify-between">
       <Link href={"/"} className="flex items-center">
-        <div className="relative h-8 w-8 mr-4">
+        <div className="relative h-8 w-8 mr-2">
           <Image src="/logo_v1.png" fill alt="Logo" />
         </div>
         <h1
