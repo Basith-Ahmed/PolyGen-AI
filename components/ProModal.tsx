@@ -12,6 +12,8 @@ import {
 import { Badge } from "./ui/badge";
 import {
   Check,
+  CircleCheck,
+  CircleCheckBig,
   Code,
   ImageIcon,
   MessagesSquare,
@@ -87,6 +89,7 @@ export default function ProModal() {
                 Pro
               </Badge>
             </div>
+            {/* <p className="text-[10px] font-semibold text-zinc-500 -mt-2">get unlimited access to all the models.</p> */}
           </DialogTitle>
           <DialogDescription className="text-center pt-2 space-y-2 text-zinc-900 font-medium">
             {tools.map((tool) => (
@@ -100,7 +103,7 @@ export default function ProModal() {
                   </div>
                   <div className="font-semibold text-sm">{tool.label}</div>
                 </div>
-                <Check className="mr-2" />
+                <CircleCheckBig className="mr-2 text-green-400" />
               </Card>
             ))}
           </DialogDescription>

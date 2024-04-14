@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Montserrat } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import {
@@ -16,9 +15,9 @@ import {
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import FreeCounter from "./FreeCounter";
-import { Poppins } from "next/font/google"
+import { Inter } from "next/font/google"
 
-const font = Poppins({
+const font = Inter({
   weight: "600",
   subsets: ["latin"]
 })
@@ -79,9 +78,9 @@ export default function Sidebar({ apiLimitCount = 0, isPro = false }: SidebarPro
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#f0f4f9] text-white">
       <div className="p-4 md:pr-0 flex-1">
-        <Link href={"/dashboard"} className="flex items-center pl-2 mb-14 w-full">
-          <div className="relative w-8 h-8 mr-2">
-            <Image fill alt="Logo" src={"/favicon.png"} />
+        <Link href={"/dashboard"} className="flex items-center pl-2 mb-14 mt-2 w-full">
+          <div className="relative w-10 h-10 mr-2">
+            <Image fill alt="Logo" src={"/logo_v1.png"} />
           </div>
           <h1 className={cn("text-3xl font-bold text-[#5f6368]", font.className)}>
             PolyGen AI
