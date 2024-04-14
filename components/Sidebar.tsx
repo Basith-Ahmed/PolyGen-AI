@@ -16,8 +16,12 @@ import {
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import FreeCounter from "./FreeCounter";
+import { Poppins } from "next/font/google"
 
-const monserrat = Montserrat({ weight: "600", subsets: ["latin"] });
+const font = Poppins({
+  weight: "600",
+  subsets: ["latin"]
+})
 
 const routes = [
   {
@@ -79,9 +83,8 @@ export default function Sidebar({ apiLimitCount = 0, isPro = false }: SidebarPro
           <div className="relative w-8 h-8 mr-2">
             <Image fill alt="Logo" src={"/favicon.png"} />
           </div>
-          <h1 className={cn("text-3xl font-bold text-[#5f6368]")}>
+          <h1 className={cn("text-3xl font-bold text-[#5f6368]", font.className)}>
             PolyGen AI
-            {/* <span className="gradient-text">PolyGen AI</span> */}
           </h1>
         </Link>
         <div className="space-y-1">
