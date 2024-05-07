@@ -8,7 +8,7 @@ export default function LandingPage() {
         <div className="h-full">
           <LandingNavbar />
           <LandingHero />
-          <LandingContent />
+          {/* <LandingContent /> */}
         </div>
     </div>
   );
